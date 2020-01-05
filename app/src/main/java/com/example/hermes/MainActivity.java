@@ -2,11 +2,14 @@ package com.example.hermes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.R.layout;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class MainActivity extends AppCompatActivity {
     private TextView mTextViewResult;
     private RequestQueue mQueue;
+    ListView listView = (ListView) findViewById(R.id.lvItems);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +71,11 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject employee = jsonArray.getJSONObject(i);
 
                                 int firstName = employee.getInt("id");
-                                String age = employee.getString("command");
+                                final String age = employee.getString("command");
                                 String mail = employee.getString("time");
+                                String[] items = {age};
+                                ArrayAdapter<String> itemsAdapter =new ArrayAdapter<String>(MainActivity.this, layout.simple_list_item_1, items);
+                                listView.setAdapter(itemsAdapter);
 
                                 mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
                             }
