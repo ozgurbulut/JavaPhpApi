@@ -31,4 +31,13 @@
         android:layout_marginBottom="79dp"
         android:text="Temizle" />
 
+    <ListView
+        android:id="@+id/lvItems"
+        android:layout_width="wrap_content"
+        android:layout_height="512dp"
+        android:layout_above="@+id/button_clean"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="45dp" />
+
 </RelativeLayout>
