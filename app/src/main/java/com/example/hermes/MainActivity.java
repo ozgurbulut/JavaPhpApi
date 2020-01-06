@@ -1,5 +1,4 @@
-package com.example.hermes;
-
+package com.example.myapplication33;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.R.layout;
@@ -11,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,11 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextViewResult;
     private RequestQueue mQueue;
-    ListView listView = (ListView) findViewById(R.id.lvItems);
 
 
     @Override
@@ -38,22 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
         mTextViewResult = findViewById(R.id.text_view_result);
         Button buttonParse = findViewById(R.id.button_parse);
-        Button buttonClean = findViewById(R.id.button_clean);
 
         mQueue = Volley.newRequestQueue(this);
-        buttonClean.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTextViewResult.setText("");
 
-            }
-        });
         buttonParse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jsonParse();
             }
         });
+
     }
 
     private void jsonParse() {
@@ -65,20 +61,31 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray jsonArray = response.getJSONArray("data");
+                            Button buttonClean = findViewById(R.id.button_clean);
 
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            ArrayList<String> items = new ArrayList<String>();
+                            final ListView listView =  findViewById(R.id.listView1);
+                            buttonClean.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    listView.setAdapter(null);
+                                }
+                            });
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject employee = jsonArray.getJSONObject(i);
 
                                 int firstName = employee.getInt("id");
-                                final String age = employee.getString("command");
-                                String mail = employee.getString("time");
-                                String[] items = {age};
-                                ArrayAdapter<String> itemsAdapter =new ArrayAdapter<String>(MainActivity.this, layout.simple_list_item_1, items);
-                                listView.setAdapter(itemsAdapter);
+                                final String command = employee.getString("command");
+                                String time = employee.getString("time");
 
-                                mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
+                                items.add(command+"--"+time);
+                               ArrayAdapter<String> itemsAdapter =new ArrayAdapter<String>(MainActivity.this, layout.simple_list_item_1, items);
+                                listView.setAdapter(itemsAdapter);
+                                // mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
                             }
+                            System.out.println("Burada"+items);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
