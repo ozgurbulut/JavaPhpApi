@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="com.example.json.MainActivity">
+    tools:context="com.example.myapplication33.MainActivity">
 
     <TextView
         android:id="@+id/text_view_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="53dp"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
@@ -30,14 +31,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="79dp"
         android:text="Temizle" />
-
     <ListView
-        android:id="@+id/lvItems"
-        android:layout_width="wrap_content"
-        android:layout_height="512dp"
-        android:layout_above="@+id/button_clean"
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="45dp" />
+        android:layout_centerHorizontal="true" >
+    </ListView>
+
 
 </RelativeLayout>
