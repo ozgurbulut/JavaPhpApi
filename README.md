@@ -1,17 +1,3 @@
-# Hermes
-Your system service has been added to your service. Let’s reload the systemctl daemon to read new file. You need to reload this deamon each time after making any changes in in .service file.
-
-
-sudo systemctl daemon-reload
-Now enable the service to start on system boot, also start the service using the following commands.
-
-sudo systemctl enable dummy.service
-sudo systemctl start dummy.service
-
-
-sudo systemctl status dummy.service
-
-
-sudo systemctl stop dummy.service          #To stop running service 
-sudo systemctl start dummy.service         #To start running service 
-sudo systemctl restart dummy.service       #To restart running service 
+In this project, we get the json data we send with php via java via android and print it as an item in our list view. 
+We can organize our objects on Listview with a simple onclicklistener. 
+This program is under development.
